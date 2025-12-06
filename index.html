@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Проект: Анализатор Паролей</title>
+    <style>
+        /* ПРОСТОЙ, НО КРАСИВЫЙ СТИЛЬ */
+        body {
+            background: #0f2027;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            font-family: 'Segoe UI', Arial;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        h1 {
+            color: #00d4ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(0,212,255,0.3);
+        }
+        
+        .section-title {
+            color: #00d4ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        /* Генератор */
+        .generator {
+            background: rgba(76,175,80,0.1);
+            border-color: rgba(76,175,80,0.3);
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .slider-container {
+            margin: 15px 0;
+        }
+        
+        input[type=range] {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #333;
+            outline: none;
+        }
+        
+        .checkbox-group {
+            text-align: left;
+        }
+        
+        .checkbox-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Кнопки */
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+        }
+        
+        .btn-generate {
+            background: linear-gradient(45deg, #00d4ff, #0088cc);
+        }
+        
+        .btn-check {
+            background: linear-gradient(45deg, #ff4081, #d81b60);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Результат генерации */
+        .password-display {
+            font-size: 1.8em;
+            color: #4CAF50;
+            background: rgba(76,175,80,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px dashed #4CAF50;
+            word-break: break-all;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: rgba(33,150,243,0.2);
+            color: #2196F3;
+            border: 2px solid #2196F3;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        /* Проверка */
+        .checker {
+            background: rgba(155,89,182,0.1);
+            border-color: rgba(155,89,182,0.3);
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        #passInput {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #00d4ff;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1.1em;
+        }
+        
+        .hint {
+            background: rgba(255,193,7,0.1);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            text-align: left;
+            color: #ffc107;
+            margin-top: 15px;
+        }
+        
+        /* Результаты */
+        .results {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .step {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .progress {
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #ff4081);
+            width: 0%;
+            transition: width 1s;
+        }
+        
+        .rating {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .good {
+            background: rgba(76,175,80,0.2);
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+        }
+        
+        .medium {
+            background: rgba(255,193,7,0.2);
+            border: 2px solid #ffc107;
+            color: #ffc107;
+        }
+        
+        .bad {
+            background: rgba(244,67,54,0.2);
+            border: 2px solid #f44336;
+            color: #f44336;
+        }
+        
+        footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Анализатор Безопасности Паролей</h1>
+        <p class="subtitle">Проект по информационной безопасности | 10 класс</p>
+        
+        <!-- СЕКЦИЯ 1: ГЕНЕРАТОР -->
+        <div class="section generator">
+            <h2 class="section-title">🎲 Генератор Надёжных Паролей</h2>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <p><strong>Длина пароля: <span id="lenValue">12</span></strong></p>
+                    <div class="slider-container">
+                        <input type="range" id="lenSlider" min="8" max="20" value="12">
+                    </div>
+                </div>
+                
+                <div class="control-group checkbox-group">
+                    <p><strong>Типы символов:</strong></p>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chkUpper" checked>
+                        <label for="chkUpper">Заглавные буквы (A-Z)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chkLower" checked>
+                        <label for="chkLower">Строчные буквы (a-z)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chkNumbers" checked>
+                        <label for="chkNumbers">Цифры (0-9)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chkSymbols" checked>
+                        <label for="chkSymbols">Спецсимволы (!@#$%)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn btn-generate" onclick="generatePassword()">🔄 Сгенерировать</button>
+                <button class="btn btn-check" onclick="generateAndTest()">⚡ Сгенерить и проверить</button>
+            </div>
+            
+            <div class="password-display" id="passwordOutput">
+                Нажмите кнопку генерации
+            </div>
+            
+            <button class="copy-btn" onclick="copyPassword()">📋 Копировать</button>
+        </div>
+        
+        <!-- СЕКЦИЯ 2: ПРОВЕРКА -->
+        <div class="section checker">
+            <h2 class="section-title">🔍 Проверка Устойчивости</h2>
+            
+            <div class="input-group">
+                <input type="text" id="passInput" placeholder="Введите пароль для проверки...">
+                <button class="btn btn-check" onclick="checkPassword()">🚀 Проверить</button>
+            </div>
+            
+            <div class="hint">
+                <p><strong>Примеры:</strong> 123456, password, qwerty, или используйте сгенерированный пароль</p>
+            </div>
+            
+            <div class="results" id="results">
+                <h3>Результаты проверки: <span id="showPass"></span></h3>
+                
+                <div class="step">
+                    <p>1. Проверка в базе популярных паролей</p>
+                    <div class="progress"><div class="progress-bar" id="bar1"></div></div>
+                    <p id="text1"></p>
+                </div>
+                
+                <div class="step">
+                    <p>2. Проверка паттернов</p>
+                    <div class="progress"><div class="progress-bar" id="bar2"></div></div>
+                    <p id="text2"></p>
+                </div>
+                
+                <div class="step">
+                    <p>3. Анализ сложности</p>
+                    <div class="progress"><div class="progress-bar" id="bar3"></div></div>
+                    <p id="text3"></p>
+                </div>
+                
+                <div class="step">
+                    <p>4. Расчёт времени взлома</p>
+                    <div class="progress"><div class="progress-bar" id="bar4"></div></div>
+                    <p id="text4"></p>
+                </div>
+                
+                <div class="rating" id="rating"></div>
+                
+                <div id="summary"></div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>🔒 Проект выполняется локально. Пароли никуда не передаются.</p>
+            <p>© 2025 | Проект по информационной безопасности</p>
+        </footer>
+    </div>
+
+    <!-- ПРОСТОЙ И РАБОЧИЙ JavaScript -->
+    <script>
+        // === ИНИЦИАЛИЗАЦИЯ ===
+        console.log("Проект загружен!");
+        
+        const badPasswords = [
+            '123456', 'password', '12345678', 'qwerty', '123456789',
+            '12345', '1234', '111111', '1234567', 'dragon'
+        ];
+        
+        // Слайдер длины
+        document.getElementById('lenSlider').oninput = function() {
+            document.getElementById('lenValue').textContent = this.value;
+        };
+        
+        // === ГЕНЕРАЦИЯ ПАРОЛЯ ===
+        function generatePassword() {
+            console.log("Генерация пароля...");
+            
+            const length = parseInt(document.getElementById('lenSlider').value);
+            const upper = document.getElementById('chkUpper').checked;
+            const lower = document.getElementById('chkLower').checked;
+            const numbers = document.getElementById('chkNumbers').checked;
+            const symbols = document.getElementById('chkSymbols').checked;
+            
+            if (!upper && !lower && !numbers && !symbols) {
+                alert("Выберите хотя бы один тип символов!");
+                return;
+            }
+            
+            let chars = '';
+            if (upper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (lower) chars += 'abcdefghijklmnopqrstuvwxyz';
+            if (numbers) chars += '0123456789';
+            if (symbols) chars += '!@#$%^&*()_+-=';
+            
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * chars.length);
+                password += chars[randomIndex];
+            }
+            
+            document.getElementById('passwordOutput').textContent = password;
+            document.getElementById('passwordOutput').style.color = '#4CAF50';
+            document.getElementById('passInput').value = password;
+            
+            console.log("Пароль создан:", password);
+        }
+        
+        function generateAndTest() {
+            generatePassword();
+            setTimeout(checkPassword, 300);
+        }
+        
+        function copyPassword() {
+            const password = document.getElementById('passwordOutput').textContent;
+            
+            if (password.includes('Нажмите')) {
+                alert("Сначала создайте пароль!");
+                return;
+            }
+            
+            const temp = document.createElement('textarea');
+            temp.value = password;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            
+            const btn = event.target;
+            btn.textContent = '✓ Скопировано!';
+            btn.style.background = '#4CAF50';
+            btn.style.borderColor = '#4CAF50';
+            
+            setTimeout(() => {
+                btn.textContent = '📋 Копировать';
+                btn.style.background = 'rgba(33,150,243,0.2)';
+                btn.style.borderColor = '#2196F3';
+            }, 2000);
+        }
+        
+        // === ПРОВЕРКА ПАРОЛЯ ===
+        function checkPassword() {
+            const password = document.getElementById('passInput').value.trim();
+            
+            if (!password) {
+                alert("Введите пароль для проверки!");
+                return;
+            }
+            
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('showPass').textContent = password;
+            
+            // Сброс
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('bar' + i).style.width = '0%';
+                document.getElementById('text' + i).textContent = '';
+                document.getElementById('text' + i).style.color = '';
+            }
+            
+            document.getElementById('rating').innerHTML = '';
+            document.getElementById('summary').innerHTML = '';
+            
+            // Запуск проверок
+            runStep1(password);
+        }
+        
+        function runStep1(password) {
+            const bar = document.getElementById('bar1');
+            const text = document.getElementById('text1');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 2;
+                bar.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    
+                    const isBad = badPasswords.includes(password.toLowerCase());
+                    
+                    if (isBad) {
+                        text.textContent = '❌ Найден в базе популярных паролей!';
+                        text.style.color = '#f44336';
+                    } else {
+                        text.textContent = '✅ Не найден в базе популярных паролей';
+                        text.style.color = '#4CAF50';
+                    }
+                    
+                    setTimeout(() => runStep2(password, isBad), 800);
+                }
+            }, 20);
+        }
+        
+        function runStep2(password, isBad) {
+            const bar = document.getElementById('bar2');
+            const text = document.getElementById('text2');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 2;
+                bar.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    
+                    let issues = [];
+                    if (password.length < 8) issues.push('короткий');
+                    if (/^\d+$/.test(password)) issues.push('только цифры');
+                    if (/^[a-z]+$/i.test(password)) issues.push('только буквы');
+                    
+                    if (issues.length > 0) {
+                        text.textContent = '⚠️ Проблемы: ' + issues.join(', ');
+                        text.style.color = '#ff9800';
+                    } else {
+                        text.textContent = '✅ Паттерны не обнаружены';
+                        text.style.color = '#4CAF50';
+                    }
+                    
+                    setTimeout(() => runStep3(password, isBad, issues.length > 0), 800);
+                }
+            }, 20);
+        }
+        
+        function runStep3(password, isBad, hasIssues) {
+            const bar = document.getElementById('bar3');
+            const text = document.getElementById('text3');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 2;
+                bar.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    
+                    const hasUpper = /[A-Z]/.test(password);
+                    const hasLower = /[a-z]/.test(password);
+                    const hasNum = /\d/.test(password);
+                    const hasSym = /[!@#$%^&*()]/.test(password);
+                    
+                    let score = 0;
+                    if (hasUpper) score++;
+                    if (hasLower) score++;
+                    if (hasNum) score++;
+                    if (hasSym) score++;
+                    
+                    text.textContent = `Сложность: ${score}/4`;
+                    text.style.color = score >= 3 ? '#4CAF50' : score >= 2 ? '#ff9800' : '#f44336';
+                    
+                    setTimeout(() => runStep4(password, isBad, hasIssues, score), 800);
+                }
+            }, 20);
+        }
+        
+        function runStep4(password, isBad, hasIssues, complexity) {
+            const bar = document.getElementById('bar4');
+            const text = document.getElementById('text4');
+            const rating = document.getElementById('rating');
+            const summary = document.getElementById('summary');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 2;
+                bar.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    
+                    // Время взлома
+                    let timeText;
+                    if (isBad || password.length < 6) {
+                        timeText = 'менее секунды';
+                    } else if (password.length < 8) {
+                        timeText = 'минуты';
+                    } else if (password.length < 12) {
+                        timeText = 'часы/дни';
+                    } else {
+                        timeText = 'годы';
+                    }
+                    
+                    text.textContent = `Время взлома: ${timeText}`;
+                    text.style.color = '#2196F3';
+                    
+                    // Рейтинг
+                    let ratingText, ratingClass;
+                    if (isBad || password.length < 6) {
+                        ratingText = '🔴 ОПАСНЫЙ';
+                        ratingClass = 'bad';
+                    } else if (hasIssues || password.length < 8 || complexity < 3) {
+                        ratingText = '🟡 СРЕДНИЙ';
+                        ratingClass = 'medium';
+                    } else {
+                        ratingText = '🟢 НАДЁЖНЫЙ';
+                        ratingClass = 'good';
+                    }
+                    
+                    rating.innerHTML = ratingText;
+                    rating.className = 'rating ' + ratingClass;
+                    
+                    // Советы
+                    let advice = '<h4>Советы:</h4><ul>';
+                    if (password.length < 12) advice += '<li>Увеличьте длину до 12+ символов</li>';
+                    if (complexity < 3) advice += '<li>Добавьте разные типы символов</li>';
+                    if (isBad) advice += '<li>Не используйте популярные пароли!</li>';
+                    advice += '</ul>';
+                    
+                    summary.innerHTML = advice;
+                    
+                    console.log("Проверка завершена!");
+                }
+            }, 20);
+        }
+        
+        // Автозапуск
+        window.onload = function() {
+            console.log("Загрузка завершена!");
+            setTimeout(generatePassword, 500);
+            
+            // Нажатие Enter в поле ввода
+            document.getElementById('passInput').onkeypress = function(e) {
+                if (e.key === 'Enter') checkPassword();
+            };
+        };
+    </script>
+</body>
+</html>
