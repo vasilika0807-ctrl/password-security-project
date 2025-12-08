@@ -357,7 +357,418 @@
         
         const badPasswords = [
             '123456', 'password', '12345678', 'qwerty', '123456789',
-            '12345', '1234', '111111', '1234567', 'dragon'
+            '12345', '1234', '111111', '1234567', 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔐 Анализатор Паролей | Проект по информационной безопасности</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            font-family: 'Segoe UI', Arial;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        h1 {
+            color: #00d4ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(0,212,255,0.3);
+        }
+        
+        .section-title {
+            color: #00d4ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .generator {
+            background: rgba(76,175,80,0.1);
+            border-color: rgba(76,175,80,0.3);
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .slider-container {
+            margin: 15px 0;
+        }
+        
+        input[type=range] {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #333;
+            outline: none;
+        }
+        
+        .checkbox-group {
+            text-align: left;
+        }
+        
+        .checkbox-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+        }
+        
+        .btn-generate {
+            background: linear-gradient(45deg, #00d4ff, #0088cc);
+        }
+        
+        .btn-check {
+            background: linear-gradient(45deg, #ff4081, #d81b60);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .password-display {
+            font-size: 1.8em;
+            color: #4CAF50;
+            background: rgba(76,175,80,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px dashed #4CAF50;
+            word-break: break-all;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: rgba(33,150,243,0.2);
+            color: #2196F3;
+            border: 2px solid #2196F3;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .checker {
+            background: rgba(155,89,182,0.1);
+            border-color: rgba(155,89,182,0.3);
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        #passInput {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #00d4ff;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1.1em;
+        }
+        
+        .hint {
+            background: rgba(255,193,7,0.1);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            text-align: left;
+            color: #ffc107;
+            margin-top: 15px;
+        }
+        
+        .results {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .step {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .progress {
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #ff4081);
+            width: 0%;
+            transition: width 1s;
+        }
+        
+        .rating {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .good {
+            background: rgba(76,175,80,0.2);
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+        }
+        
+        .medium {
+            background: rgba(255,193,7,0.2);
+            border: 2px solid #ffc107;
+            color: #ffc107;
+        }
+        
+        .bad {
+            background: rgba(244,67,54,0.2);
+            border: 2px solid #f44336;
+            color: #f44336;
+        }
+        
+        .info-box {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .info-box p {
+            margin: 8px 0;
+            color: #80deea;
+        }
+        
+        footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            .buttons, .input-group { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Анализатор Безопасности Паролей</h1>
+        <p class="subtitle">Проект по информационной безопасности | 10 класс</p>
+        
+        <div class="info-box">
+            <p>🎓 <strong>Учебный проект:</strong> Генерация и анализ криптостойких паролей</p>
+            <p>🔍 <strong>База данных:</strong> Проверка против 200+ самых ненадёжных паролей</p>
+            <p>🔒 <strong>Особенность:</strong> Все операции выполняются локально в браузере</p>
+        </div>
+        
+        <!-- СЕКЦИЯ 1: ГЕНЕРАТОР -->
+        <div class="section generator">
+            <h2 class="section-title">🎲 Генератор Надёжных Паролей</h2>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <p><strong>Длина пароля: <span id="lenValue">12</span></strong></p>
+                    <div class="slider-container">
+                        <input type="range" id="lenSlider" min="8" max="20" value="12">
+                    </div>
+                </div>
+                
+                <div class="control-group checkbox-group">
+                    <p><strong>Типы символов:</strong></p>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chkUpper" checked>
+                        <label for="chkUpper">Заглавные буквы (A-Z)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chkLower" checked>
+                        <label for="chkLower">Строчные буквы (a-z)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chkNumbers" checked>
+                        <label for="chkNumbers">Цифры (0-9)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chkSymbols" checked>
+                        <label for="chkSymbols">Спецсимволы (!@#$%)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn btn-generate" onclick="generatePassword()">🔄 Сгенерировать</button>
+                <button class="btn btn-check" onclick="generateAndTest()">⚡ Сгенерить и проверить</button>
+            </div>
+            
+            <div class="password-display" id="passwordOutput">
+                Нажмите кнопку генерации
+            </div>
+            
+            <button class="copy-btn" onclick="copyPassword()">📋 Копировать</button>
+        </div>
+        
+        <!-- СЕКЦИЯ 2: ПРОВЕРКА -->
+        <div class="section checker">
+            <h2 class="section-title">🔍 Проверка Устойчивости Пароля</h2>
+            
+            <div class="input-group">
+                <input type="text" id="passInput" placeholder="Введите пароль для проверки...">
+                <button class="btn btn-check" onclick="checkPassword()">🚀 Проверить</button>
+            </div>
+            
+            <div class="hint">
+                <p><strong>Примеры для теста:</strong> Введите любой пароль из списка ниже или используйте сгенерированный</p>
+                <p style="font-size: 0.9em; color: #ff9800;">Попробуйте: 123456, password, qwerty, 111111, dragon, admin</p>
+            </div>
+            
+            <div class="results" id="results">
+                <h3>Результаты проверки: <span id="showPass"></span></h3>
+                
+                <div class="step">
+                    <p>1. Проверка в базе из 200+ ненадёжных паролей</p>
+                    <div class="progress"><div class="progress-bar" id="bar1"></div></div>
+                    <p id="text1"></p>
+                </div>
+                
+                <div class="step">
+                    <p>2. Проверка паттернов и шаблонов</p>
+                    <div class="progress"><div class="progress-bar" id="bar2"></div></div>
+                    <p id="text2"></p>
+                </div>
+                
+                <div class="step">
+                    <p>3. Анализ сложности пароля</p>
+                    <div class="progress"><div class="progress-bar" id="bar3"></div></div>
+                    <p id="text3"></p>
+                </div>
+                
+                <div class="step">
+                    <p>4. Расчёт времени взлома</p>
+                    <div class="progress"><div class="progress-bar" id="bar4"></div></div>
+                    <p id="text4"></p>
+                </div>
+                
+                <div class="rating" id="rating"></div>
+                
+                <div id="summary"></div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>🔒 Все операции выполняются локально в вашем браузере. Пароли никуда не передаются.</p>
+            <p>© 2024 | Проект по информационной безопасности: "Большие данные, ИИ и безопасность"</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript с полной базой паролей -->
+    <script>
+        // === БАЗА ДАННЫХ НЕНАДЁЖНЫХ ПАРОЛЕЙ (200+ паролей) ===
+        const badPasswords = [
+            '123456', '123456789', 'qwerty', '111111', '1234567', '666666',
+            '12345678', '7777777', '123321', '0', '654321', '1234567890',
+            '123123', '555555', 'vkontakte', 'gfhjkm', '159753', '777777',
+            'TempPassWord', 'qazwsx', '1q2w3e', '1234', '112233', '121212',
+            'qwertyuiop', 'qq18ww899', '987654321', '12345', 'zxcvbn', 'zxcvbnm',
+            '999999', 'samsung', 'ghbdtn', '1q2w3e4r', '1111111', '123654',
+            '159357', '131313', 'qazwsxedc', '123qwe', '222222', 'asdfgh',
+            '333333', '9379992', 'asdfghjkl', '4815162342', '12344321', 'любовь',
+            '88888888', '11111111', 'knopka', 'пароль', '789456', 'qwertyu',
+            '1q2w3e4r5t', 'iloveyou', 'vfhbyf', 'marina', 'password', 'qweasdzxc',
+            '10203', '987654', 'yfnfif', 'cjkysirj', 'nikita', '888888', 'йцукен',
+            'vfrcbv', 'k.,jdm', 'qwertyuiop[]', 'qwe123', 'qweasd', 'natasha',
+            '123123123', 'fylhtq', 'q1w2e3', 'stalker', '1111111111', 'q1w2e3r4',
+            'nastya', '147258369', '147258', 'fyfcnfcbz', '1234554321', '1qaz2wsx',
+            'andrey', '111222', '147852', 'genius', 'sergey', '7654321', '232323',
+            '123789', 'fktrcfylh', 'spartak', 'admin', 'test', '123', 'azerty',
+            'abc123', 'lol123', 'easytocrack1', 'hello', 'saravn', 'holysh!t',
+            '1', 'Test123', 'tundra_cool2', '456', 'dragon', 'thomas', 'killer',
+            'root', '1111', 'pass', 'master', 'aaaaaa', 'a', 'monkey', 'daniel',
+            'asdasd', 'e10adc3949ba59abbe56e057f20f883e', 'changeme', 'computer',
+            'jessica', 'letmein', 'mirage', 'loulou', 'lol', 'superman', 'shadow',
+            'admin123', 'secret', 'administrator', 'sophie', 'kikugalanetroot',
+            'doudou', 'liverpool', 'hallo', 'sunshine', 'charlie', 'parola',
+            '100827092', '/', 'michael', 'andrew', 'password1', 'fuckyou', 'matrix',
+            'cjmasterinf', 'internet', 'hallo123', 'eminem', 'demo', 'gewinner',
+            'pokemon', 'abcd1234', 'guest', 'ngockhoa', 'martin', 'sandra', 'asdf',
+            'hejsan', 'george', 'qweqwe', 'lollipop', 'lovers', 'q1q1q1', 'tecktonik',
+            'naruto', '12', 'password12', 'password123', 'password1234', 'password12345',
+            'password123456', 'password1234567', 'password12345678', 'password123456789',
+            '000000', 'maximius', '123abc', 'baseball1', 'football1', 'soccer', 'princess',
+            'slipknot', '11111', 'nokia', 'super', 'star', '666999', '12341234', '1234321',
+            '135790', '159951', '212121', 'zzzzzz', '121314', '134679', '142536',
+            '19921992', '753951', '7007', '1111114', '124578', '19951995', '258456',
+            'qwaszx', 'zaqwsx', '55555', '77777', '54321', 'qwert', '22222', '33333',
+            '99999', '88888', '66666'
         ];
         
         // Слайдер длины
@@ -616,4 +1027,5 @@
         };
     </script>
 </body>
+
 </html>
