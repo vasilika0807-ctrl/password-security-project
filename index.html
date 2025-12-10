@@ -12,941 +12,733 @@
         }
         
         body {
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            background: linear-gradient(135deg, #0c2461, #1e3799, #4a69bd);
             color: white;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.5);
         }
         
         h1 {
-            color: #00d4ff;
-            font-size: 2.5em;
+            color: #3498db;
+            font-size: 2.8em;
             margin-bottom: 10px;
-            text-align: center;
+            text-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
         }
         
         .subtitle {
-            color: #aaa;
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            text-align: center;
+            color: #95a5a6;
+            font-size: 1.1em;
+            margin-bottom: 15px;
         }
         
-        .section {
-            background: rgba(0, 0, 0, 0.3);
+        .card {
+            background: rgba(30, 30, 46, 0.8);
             border-radius: 15px;
             padding: 25px;
-            margin: 25px 0;
-            border: 1px solid rgba(0, 212, 255, 0.3);
+            margin-bottom: 25px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .section-title {
-            color: #00d4ff;
-            font-size: 1.8em;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-title {
+            color: #3498db;
+            font-size: 1.6em;
             margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        .generator {
-            background: rgba(76, 175, 80, 0.1);
-            border-color: rgba(76, 175, 80, 0.3);
-        }
-        
-        .checker {
-            background: rgba(155, 89, 182, 0.1);
-            border-color: rgba(155, 89, 182, 0.3);
-        }
-        
-        .controls {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .control-group {
-            flex: 1;
-            min-width: 200px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
+            align-items: center;
+            gap: 10px;
         }
         
         .slider-container {
-            margin: 15px 0;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .length-value {
+            color: #2ecc71;
+            font-size: 1.3em;
         }
         
         input[type="range"] {
             width: 100%;
-            height: 10px;
-            border-radius: 5px;
-            background: #333;
+            height: 12px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 6px;
             outline: none;
             -webkit-appearance: none;
         }
         
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
+            background: white;
             border-radius: 50%;
-            background: #00d4ff;
+            border: 3px solid #3498db;
             cursor: pointer;
-            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
         }
         
-        .checkbox-group {
-            text-align: left;
-        }
-        
-        .checkbox-item {
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        .checkbox-item input {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-        
-        .checkbox-item label {
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        .buttons {
-            display: flex;
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin: 20px 0;
         }
         
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .option-item:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        .option-item input {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            accent-color: #3498db;
+            cursor: pointer;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
         .btn {
             flex: 1;
-            padding: 15px 20px;
+            min-width: 200px;
+            padding: 18px 30px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
-            color: white;
             transition: all 0.3s ease;
-            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
         }
         
-        .btn-generate {
-            background: linear-gradient(45deg, #00d4ff, #0088cc);
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
         }
         
-        .btn-check {
-            background: linear-gradient(45deg, #ff4081, #d81b60);
+        .btn-secondary {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn:active {
-            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .password-display {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px dashed #3498db;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
             font-size: 1.8em;
-            color: #4CAF50;
-            background: rgba(76, 175, 80, 0.1);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            border: 2px dashed #4CAF50;
-            word-break: break-all;
-            font-family: 'Courier New', monospace;
             text-align: center;
+            font-family: 'Courier New', monospace;
+            color: #2ecc71;
+            word-break: break-all;
             min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1.4;
+            letter-spacing: 2px;
         }
         
-        .copy-btn {
-            background: rgba(33, 150, 243, 0.2);
-            color: #2196F3;
-            border: 2px solid #2196F3;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 10px auto;
-            display: block;
-            font-size: 1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            min-width: 200px;
-        }
-        
-        .copy-btn:hover {
-            background: rgba(33, 150, 243, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        #passInput {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid #00d4ff;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1.1em;
-            font-family: 'Courier New', monospace;
-        }
-        
-        #passInput:focus {
-            outline: none;
-            border-color: #ff4081;
-            box-shadow: 0 0 10px rgba(255, 64, 129, 0.3);
-        }
-        
-        .hint {
-            background: rgba(255, 193, 7, 0.1);
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            text-align: left;
-            color: #ffc107;
-            margin-top: 15px;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .results {
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .step {
-            background: rgba(255, 255, 255, 0.05);
+        .test-input {
+            width: 100%;
+            padding: 18px;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #3498db;
             border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-            text-align: left;
+            color: white;
+            font-size: 1.2em;
+            font-family: 'Courier New', monospace;
+            transition: border-color 0.3s;
         }
         
-        .progress {
-            height: 10px;
-            background: #333;
-            border-radius: 5px;
-            margin: 10px 0;
-            overflow: hidden;
+        .test-input:focus {
+            outline: none;
+            border-color: #2ecc71;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+        }
+        
+        .results-container {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid #3498db;
         }
         
         .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #00d4ff, #ff4081);
-            width: 0%;
-            transition: width 1s ease;
-        }
-        
-        .rating {
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            font-size: 1.5em;
-            font-weight: bold;
-            text-align: center;
-        }
-        
-        .good {
-            background: rgba(76, 175, 80, 0.2);
-            border: 2px solid #4CAF50;
-            color: #4CAF50;
-        }
-        
-        .medium {
-            background: rgba(255, 193, 7, 0.2);
-            border: 2px solid #ffc107;
-            color: #ffc107;
-        }
-        
-        .bad {
-            background: rgba(244, 67, 54, 0.2);
-            border: 2px solid #f44336;
-            color: #f44336;
-        }
-        
-        .info-box {
-            background: rgba(0, 212, 255, 0.1);
-            border-left: 4px solid #00d4ff;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin: 20px 0;
-            text-align: left;
-        }
-        
-        .info-box p {
-            margin: 8px 0;
-            color: #80deea;
-        }
-        
-        .time-details {
-            background: rgba(33, 150, 243, 0.1);
-            border: 1px solid #2196F3;
-            border-radius: 10px;
-            padding: 15px;
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
             margin: 15px 0;
+            overflow: hidden;
         }
         
-        .time-item {
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0;
+            transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 6px;
+        }
+        
+        .rating-box {
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 25px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .rating-excellent {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(39, 174, 96, 0.2));
+            border: 3px solid #2ecc71;
+            color: #2ecc71;
+        }
+        
+        .rating-good {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(41, 128, 185, 0.2));
+            border: 3px solid #3498db;
+            color: #3498db;
+        }
+        
+        .rating-weak {
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.2), rgba(243, 156, 18, 0.2));
+            border: 3px solid #f1c40f;
+            color: #f1c40f;
+        }
+        
+        .rating-poor {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2));
+            border: 3px solid #e74c3c;
+            color: #e74c3c;
+        }
+        
+        .advice-box {
+            background: rgba(41, 128, 185, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #3498db;
+        }
+        
+        .advice-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .advice-list li {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
             display: flex;
-            justify-content: space-between;
-            margin: 8px 0;
-            padding: 5px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+            gap: 10px;
         }
         
-        .time-value {
-            color: #00d4ff;
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .highlight {
+            color: #3498db;
             font-weight: bold;
         }
         
-        footer {
-            margin-top: 30px;
-            color: #777;
-            font-size: 0.9em;
-            text-align: center;
+        .success {
+            color: #2ecc71;
         }
         
-        @media (max-width: 600px) {
+        .warning {
+            color: #f1c40f;
+        }
+        
+        .error {
+            color: #e74c3c;
+        }
+        
+        @media (max-width: 768px) {
             .container {
-                padding: 15px;
-            }
-            
-            .buttons, .input-group {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .section-title {
-                font-size: 1.5em;
-            }
-            
-            .password-display {
-                font-size: 1.4em;
                 padding: 15px;
             }
             
             h1 {
                 font-size: 2em;
             }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                min-width: 100%;
+            }
+            
+            .password-display {
+                font-size: 1.4em;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔐 Анализатор Безопасности Паролей</h1>
-        <p class="subtitle">Проект по информационной безопасности | 10 класс</p>
-        
-        <div class="info-box">
-            <p>🎓 <strong>Учебный проект:</strong> Генерация и анализ криптостойких паролей</p>
-            <p>🔍 <strong>База данных:</strong> Проверка против 200+ самых ненадёжных паролей</p>
-            <p>🔒 <strong>Особенность:</strong> Все операции выполняются локально в браузере</p>
-        </div>
-        
-        <!-- СЕКЦИЯ 1: ГЕНЕРАТОР -->
-        <div class="section generator">
-            <h2 class="section-title">🎲 Генератор Надёжных Паролей</h2>
+        <header>
+            <h1>🔐 Анализатор Безопасности Паролей</h1>
+            <p class="subtitle">Генерация и проверка криптостойких паролей</p>
+        </header>
+
+        <div class="card">
+            <div class="card-title">🎲 Генератор паролей</div>
             
-            <div class="controls">
-                <div class="control-group">
-                    <p><strong>Длина пароля: <span id="lenValue">12</span> символов</strong></p>
-                    <div class="slider-container">
-                        <input type="range" id="lenSlider" min="8" max="20" value="12" oninput="updateSliderValue()">
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.9em; color: #aaa;">
-                        🔸 Короткий (8-10) 🔸 Средний (11-13) 🔸 Длинный (14-20)
-                    </p>
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Длина пароля:</span>
+                    <span class="length-value" id="lengthValue">12</span>
                 </div>
-                
-                <div class="control-group checkbox-group">
-                    <p><strong>Типы символов:</strong></p>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="chkUpper" checked onclick="generatePassword()">
-                        <label for="chkUpper">Заглавные буквы (A-Z)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="chkLower" checked onclick="generatePassword()">
-                        <label for="chkLower">Строчные буквы (a-z)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="chkNumbers" checked onclick="generatePassword()">
-                        <label for="chkNumbers">Цифры (0-9)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="chkSymbols" checked onclick="generatePassword()">
-                        <label for="chkSymbols">Спецсимволы (!@#$%^&*)</label>
-                    </div>
+                <input type="range" id="lengthSlider" min="8" max="32" value="12">
+            </div>
+            
+            <div class="options-grid">
+                <div class="option-item">
+                    <input type="checkbox" id="uppercase" checked>
+                    <label for="uppercase">Заглавные буквы (A-Z)</label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" id="lowercase" checked>
+                    <label for="lowercase">Строчные буквы (a-z)</label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" id="numbers" checked>
+                    <label for="numbers">Цифры (0-9)</label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" id="symbols" checked>
+                    <label for="symbols">Спецсимволы (!@#$%^&*)</label>
                 </div>
             </div>
             
-            <div class="buttons">
-                <button class="btn btn-generate" onclick="generatePassword()">
-                    <span>🔄</span> Сгенерировать пароль
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="generatePassword()">
+                    🔄 Сгенерировать
                 </button>
-                <button class="btn btn-check" onclick="generateAndTest()">
-                    <span>⚡</span> Сгенерить и проверить
+                <button class="btn btn-secondary" onclick="generateAndTest()">
+                    ⚡ Сгенерировать и проверить
+                </button>
+                <button class="btn" onclick="copyPassword()">
+                    📋 Скопировать
                 </button>
             </div>
             
             <div class="password-display" id="passwordOutput">
-                Нажмите кнопку "Сгенерировать пароль"
+                Нажмите кнопку для генерации пароля
             </div>
-            
-            <button class="copy-btn" onclick="copyPassword()">
-                📋 Копировать пароль в буфер обмена
-            </button>
         </div>
         
-        <!-- СЕКЦИЯ 2: ПРОВЕРКА -->
-        <div class="section checker">
-            <h2 class="section-title">🔍 Проверка Устойчивости Пароля</h2>
+        <div class="card">
+            <div class="card-title">🔍 Проверка пароля</div>
             
-            <div class="input-group">
-                <input type="text" id="passInput" placeholder="Введите пароль для проверки..." autocomplete="off">
-                <button class="btn btn-check" onclick="checkPassword()">
-                    <span>🚀</span> Проверить пароль
+            <input type="text" class="test-input" id="passwordInput" 
+                   placeholder="Введите пароль для проверки..." 
+                   onkeypress="if(event.key === 'Enter') testPassword()">
+            
+            <div class="button-group">
+                <button class="btn btn-danger" onclick="testPassword()">
+                    🚀 Проверить пароль
+                </button>
+                <button class="btn" onclick="clearInput()">
+                    🗑️ Очистить
                 </button>
             </div>
             
-            <div class="hint">
-                <p><strong>Примеры для теста:</strong> Введите любой пароль из списка ниже или используйте сгенерированный</p>
-                <p style="font-size: 0.9em; color: #ff9800;">Попробуйте: 123456, password, qwerty, 111111, dragon, admin, или ваш пароль</p>
-            </div>
-            
-            <div class="results" id="results">
-                <h3>Результаты проверки: <span id="showPass"></span></h3>
-                
-                <div class="step">
-                    <p>1. Проверка в базе из 200+ ненадёжных паролей</p>
-                    <div class="progress"><div class="progress-bar" id="bar1"></div></div>
-                    <p id="text1"></p>
+            <div class="results-container" id="resultsContainer">
+                <div class="result-item" id="step1">
+                    <h4>1. Проверка в базе слабых паролей</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress1"></div>
+                    </div>
+                    <div id="result1"></div>
                 </div>
                 
-                <div class="step">
-                    <p>2. Анализ сложности пароля</p>
-                    <div class="progress"><div class="progress-bar" id="bar2"></div></div>
-                    <p id="text2"></p>
+                <div class="result-item" id="step2">
+                    <h4>2. Анализ сложности</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress2"></div>
+                    </div>
+                    <div id="result2"></div>
                 </div>
                 
-                <div class="step">
-                    <p>3. Детальный расчет времени взлома</p>
-                    <div class="progress"><div class="progress-bar" id="bar3"></div></div>
-                    <div id="timeDetails"></div>
+                <div class="result-item" id="step3">
+                    <h4>3. Время взлома</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress3"></div>
+                    </div>
+                    <div id="result3"></div>
                 </div>
                 
-                <div class="step">
-                    <p>4. Итоговая оценка безопасности</p>
-                    <div class="progress"><div class="progress-bar" id="bar4"></div></div>
-                    <div class="rating" id="rating"></div>
-                </div>
-                
-                <div id="summary"></div>
+                <div id="ratingContainer"></div>
+                <div id="adviceContainer"></div>
             </div>
         </div>
         
-        <footer>
-            <p>🔒 Все операции выполняются локально в вашем браузере. Пароли никуда не передаются.</p>
+        <div class="footer">
+            <p>🔒 Все операции выполняются локально в вашем браузере</p>
             <p>© 2025 | Проект по информационной безопасности</p>
-        </footer>
+        </div>
     </div>
 
     <script>
-        // === ПРОСТЫЕ И РАБОЧИЕ ФУНКЦИИ ===
-        
-        // Функция обновления значения слайдера
-        function updateSliderValue() {
-            const slider = document.getElementById('lenSlider');
-            const valueSpan = document.getElementById('lenValue');
-            if (slider && valueSpan) {
-                valueSpan.textContent = slider.value;
-                // Автоматически генерируем новый пароль при изменении длины
-                generatePassword();
-            }
-        }
-        
-        // Инициализация при загрузке страницы
-        window.onload = function() {
-            console.log("Страница загружена!");
-            
-            // Устанавливаем начальное значение слайдера
-            updateSliderValue();
-            
-            // Генерируем первый пароль
-            generatePassword();
-            
-            // Настраиваем Enter в поле ввода
-            const passInput = document.getElementById('passInput');
-            if (passInput) {
-                passInput.onkeypress = function(e) {
-                    if (e.key === 'Enter') {
-                        checkPassword();
-                    }
-                };
-            }
-        };
-        
-        // === БАЗА ДАННЫХ НЕНАДЁЖНЫХ ПАРОЛЕЙ ===
-        const badPasswords = [
-            '123456', '123456789', 'qwerty', '111111', '1234567', '666666',
-            '12345678', '7777777', '123321', '0', '654321', '1234567890',
-            '123123', '555555', 'vkontakte', 'gfhjkm', '159753', '777777',
-            'TempPassWord', 'qazwsx', '1q2w3e', '1234', '112233', '121212',
-            'qwertyuiop', 'qq18ww899', '987654321', '12345', 'zxcvbn', 'zxcvbnm',
-            '999999', 'samsung', 'ghbdtn', '1q2w3e4r', '1111111', '123654',
-            '159357', '131313', 'qazwsxedc', '123qwe', '222222', 'asdfgh',
-            '333333', '9379992', 'asdfghjkl', '4815162342', '12344321', 'любовь',
-            '88888888', '11111111', 'knopka', 'пароль', '789456', 'qwertyu',
-            '1q2w3e4r5t', 'iloveyou', 'vfhbyf', 'marina', 'password', 'qweasdzxc',
-            '10203', '987654', 'yfnfif', 'cjkysirj', 'nikita', '888888', 'йцукен',
-            'vfrcbv', 'k.,jdm', 'qwertyuiop[]', 'qwe123', 'qweasd', 'natasha',
-            '123123123', 'fylhtq', 'q1w2e3', 'stalker', '1111111111', 'q1w2e3r4',
-            'nastya', '147258369', '147258', 'fyfcnfcbz', '1234554321', '1qaz2wsx',
-            'andrey', '111222', '147852', 'genius', 'sergey', '7654321', '232323',
-            '123789', 'fktrcfylh', 'spartak', 'admin', 'test', '123', 'azerty',
-            'abc123', 'lol123', 'easytocrack1', 'hello', 'saravn', 'holysh!t',
-            '1', 'Test123', 'tundra_cool2', '456', 'dragon', 'thomas', 'killer',
-            'root', '1111', 'pass', 'master', 'aaaaaa', 'a', 'monkey', 'daniel',
-            'asdasd', 'e10adc3949ba59abbe56e057f20f883e', 'changeme', 'computer',
-            'jessica', 'letmein', 'mirage', 'loulou', 'lol', 'superman', 'shadow',
-            'admin123', 'secret', 'administrator', 'sophie', 'kikugalanetroot',
-            'doudou', 'liverpool', 'hallo', 'sunshine', 'charlie', 'parola',
-            '100827092', '/', 'michael', 'andrew', 'password1', 'fuckyou', 'matrix',
-            'cjmasterinf', 'internet', 'hallo123', 'eminem', 'demo', 'gewinner',
-            'pokemon', 'abcd1234', 'guest', 'ngockhoa', 'martin', 'sandra', 'asdf',
-            'hejsan', 'george', 'qweqwe', 'lollipop', 'lovers', 'q1q1q1', 'tecktonik',
-            'naruto', '12', 'password12', 'password123', 'password1234', 'password12345',
-            'password123456', 'password1234567', 'password12345678', 'password123456789',
-            '000000', 'maximius', '123abc', 'baseball1', 'football1', 'soccer', 'princess',
-            'slipknot', '11111', 'nokia', 'super', 'star', '666999', '12341234', '1234321',
-            '135790', '159951', '212121', 'zzzzzz', '121314', '134679', '142536',
-            '19921992', '753951', '7007', '1111114', '124578', '19951995', '258456',
-            'qwaszx', 'zaqwsx', '55555', '77777', '54321', 'qwert', '22222', '33333',
-            '99999', '88888', '66666'
+        const weakPasswords = [
+            '123456', 'password', '12345678', 'qwerty', '123456789',
+            '12345', '1234', '111111', '1234567', 'dragon',
+            'baseball', 'football', 'monkey', 'letmein', 'shadow',
+            'master', '666666', 'qwertyuiop', '123321', 'mustang',
+            '1234567890', 'michael', '654321', 'superman', '1qaz2wsx',
+            '7777777', 'fuckyou', '121212', '000000', 'qazwsx',
+            '123qwe', 'killer', 'trustno1', 'jordan', 'jennifer',
+            'zxcvbnm', 'asdfgh', 'hunter', 'buster', 'soccer',
+            'harley', 'batman', 'andrew', 'tigger', 'sunshine',
+            'iloveyou', '2000', 'charlie', 'robert', 'thomas',
+            'hockey', 'ranger', 'daniel', 'starwars', '112233',
+            'george', 'computer', 'michelle', 'jessica', 'pepper',
+            '1111', 'zxcvbn', '555555', '11111111', '131313',
+            'freedom', '777777', 'pass', 'maggie', '159753',
+            'aaaaaa', 'peanut', 'princess', 'joshua', 'cheese',
+            'amanda', 'summer', 'love', 'ashley', '6969',
+            'nicole', 'chelsea', 'biteme', 'matthew', 'access',
+            'yankees', '987654321', 'dallas', 'austin', 'thunder',
+            'taylor', 'matrix', 'minecraft', 'admin', 'qwer1234'
         ];
-        
-        // === ФУНКЦИЯ ГЕНЕРАЦИИ ПАРОЛЯ ===
+
+        document.getElementById('lengthSlider').addEventListener('input', function() {
+            document.getElementById('lengthValue').textContent = this.value;
+            generatePassword();
+        });
+
+        document.querySelectorAll('.option-item input').forEach(input => {
+            input.addEventListener('change', generatePassword);
+        });
+
         function generatePassword() {
-            console.log("Генерация пароля...");
+            const length = parseInt(document.getElementById('lengthSlider').value);
+            const uppercase = document.getElementById('uppercase').checked;
+            const lowercase = document.getElementById('lowercase').checked;
+            const numbers = document.getElementById('numbers').checked;
+            const symbols = document.getElementById('symbols').checked;
             
-            // Получаем длину из слайдера
-            const length = parseInt(document.getElementById('lenSlider').value) || 12;
-            
-            // Получаем настройки символов
-            const upper = document.getElementById('chkUpper').checked;
-            const lower = document.getElementById('chkLower').checked;
-            const numbers = document.getElementById('chkNumbers').checked;
-            const symbols = document.getElementById('chkSymbols').checked;
-            
-            // Проверяем, что хотя бы один тип символов выбран
-            if (!upper && !lower && !numbers && !symbols) {
-                alert("Пожалуйста, выберите хотя бы один тип символов!");
-                return;
-            }
-            
-            // Создаем строку доступных символов
             let chars = '';
-            if (upper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            if (lower) chars += 'abcdefghijklmnopqrstuvwxyz';
+            if (uppercase) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (lowercase) chars += 'abcdefghijklmnopqrstuvwxyz';
             if (numbers) chars += '0123456789';
             if (symbols) chars += '!@#$%^&*()_+-=';
             
-            // Генерируем пароль
+            if (!chars) {
+                document.getElementById('passwordOutput').textContent = 'Выберите хотя бы один тип символов';
+                return;
+            }
+            
             let password = '';
             for (let i = 0; i < length; i++) {
-                const randomIndex = Math.floor(Math.random() * chars.length);
-                password += chars[randomIndex];
+                password += chars[Math.floor(Math.random() * chars.length)];
             }
             
-            // Показываем пароль
             document.getElementById('passwordOutput').textContent = password;
-            document.getElementById('passwordOutput').style.color = '#4CAF50';
-            
-            // Вставляем в поле для проверки
-            document.getElementById('passInput').value = password;
-            
-            console.log("Пароль сгенерирован:", password);
-            return password;
+            document.getElementById('passwordInput').value = password;
         }
-        
+
         function generateAndTest() {
             generatePassword();
-            setTimeout(checkPassword, 300);
+            setTimeout(testPassword, 300);
         }
-        
-        // === ФУНКЦИЯ КОПИРОВАНИЯ ===
+
         function copyPassword() {
             const password = document.getElementById('passwordOutput').textContent;
-            
-            if (password.includes('Нажмите') || password.includes('Сгенерировать')) {
-                alert("Сначала создайте пароль!");
-                return;
-            }
-            
-            // Пробуем современный способ
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(password).then(function() {
-                    showCopySuccess();
-                }).catch(function() {
-                    fallbackCopy(password);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(password).then(() => {
+                    const btn = document.querySelector('[onclick="copyPassword()"]');
+                    const original = btn.innerHTML;
+                    btn.innerHTML = '✓ Скопировано';
+                    setTimeout(() => btn.innerHTML = original, 2000);
                 });
-            } else {
-                fallbackCopy(password);
             }
         }
-        
-        function fallbackCopy(text) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                showCopySuccess();
-            } catch (err) {
-                alert('Не удалось скопировать пароль. Скопируйте его вручную: ' + text);
-            }
-            
-            document.body.removeChild(textArea);
+
+        function clearInput() {
+            document.getElementById('passwordInput').value = '';
         }
-        
-        function showCopySuccess() {
-            const btn = document.querySelector('.copy-btn');
-            const originalText = btn.textContent;
-            btn.textContent = '✓ Скопировано!';
-            btn.style.background = '#4CAF50';
-            btn.style.borderColor = '#4CAF50';
-            
-            setTimeout(function() {
-                btn.textContent = originalText;
-                btn.style.background = 'rgba(33,150,243,0.2)';
-                btn.style.borderColor = '#2196F3';
-            }, 2000);
-        }
-        
-        // === ФУНКЦИИ РАСЧЕТА ВРЕМЕНИ ВЗЛОМА ===
-        function calculateCrackTime(password) {
-            let charSetSize = 0;
-            if (/[a-z]/.test(password)) charSetSize += 26;
-            if (/[A-Z]/.test(password)) charSetSize += 26;
-            if (/[0-9]/.test(password)) charSetSize += 10;
-            if (/[^a-zA-Z0-9]/.test(password)) charSetSize += 10;
-            
-            if (charSetSize === 0) charSetSize = 1;
-            
-            // Количество комбинаций
-            const combinations = Math.pow(charSetSize, password.length);
-            
-            // Скорости в попытках в секунду
-            const speeds = {
-                обычныйПК: 1000000000,        // 1 млрд/сек
-                ботнет: 100000000000,         // 100 млрд/сек
-                суперкомпьютер: 1000000000000  // 1 трлн/сек
-            };
-            
-            // Время в секундах для каждой скорости
-            return {
-                combinations: combinations.toExponential(2),
-                обычныйПК: combinations / speeds.обычныйПК,
-                ботнет: combinations / speeds.ботнет,
-                суперкомпьютер: combinations / speeds.суперкомпьютер,
-                charSetSize: charSetSize
-            };
-        }
-        
-        function formatTime(seconds) {
-            if (seconds < 0.001) return "менее миллисекунды";
-            if (seconds < 1) return `${(seconds * 1000).toFixed(0)} миллисекунд`;
-            if (seconds < 60) return `${seconds.toFixed(1)} секунд`;
-            
-            const minutes = seconds / 60;
-            if (minutes < 60) return `${minutes.toFixed(1)} минут`;
-            
-            const hours = minutes / 60;
-            if (hours < 24) return `${hours.toFixed(1)} часов`;
-            
-            const days = hours / 24;
-            if (days < 30) return `${days.toFixed(1)} дней`;
-            
-            const months = days / 30.44;
-            if (months < 12) return `${months.toFixed(1)} месяцев`;
-            
-            const years = months / 12;
-            if (years < 1000) return `${years.toFixed(1)} лет`;
-            if (years < 1000000) return `${(years / 1000).toFixed(1)} тысяч лет`;
-            
-            return `${(years / 1000000).toFixed(1)} миллионов лет`;
-        }
-        
-        // === ФУНКЦИЯ ПРОВЕРКИ ПАРОЛЯ ===
-        function checkPassword() {
-            const password = document.getElementById('passInput').value.trim();
-            
+
+        function testPassword() {
+            const password = document.getElementById('passwordInput').value.trim();
             if (!password) {
-                alert("Введите пароль для проверки!");
+                alert('Введите пароль для проверки');
                 return;
             }
             
-            // Показываем результаты
-            document.getElementById('results').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'block';
+            resetProgress();
             
-            // Скрываем часть пароля если он длинный
-            const displayPass = password.length > 20 ? 
-                password.substring(0, 10) + '...' + password.substring(password.length - 10) : 
-                password;
-            document.getElementById('showPass').textContent = displayPass;
-            
-            // Сброс предыдущих результатов
-            resetResults();
-            
-            // Запускаем проверки
-            runStep1(password);
+            simulateProgress('progress1', 100, () => {
+                checkCommonPasswords(password);
+                simulateProgress('progress2', 100, () => {
+                    analyzeComplexity(password);
+                    simulateProgress('progress3', 100, () => {
+                        calculateCrackTime(password);
+                        showFinalResult(password);
+                    });
+                });
+            });
         }
-        
-        function resetResults() {
-            for (let i = 1; i <= 4; i++) {
-                document.getElementById('bar' + i).style.width = '0%';
+
+        function resetProgress() {
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById(`progress${i}`).style.width = '0%';
+                document.getElementById(`result${i}`).innerHTML = '';
             }
-            document.getElementById('text1').textContent = '';
-            document.getElementById('text2').textContent = '';
-            document.getElementById('timeDetails').innerHTML = '';
-            document.getElementById('rating').innerHTML = '';
-            document.getElementById('summary').innerHTML = '';
+            document.getElementById('ratingContainer').innerHTML = '';
+            document.getElementById('adviceContainer').innerHTML = '';
         }
-        
-        function runStep1(password) {
-            const bar = document.getElementById('bar1');
-            const text = document.getElementById('text1');
-            
+
+        function simulateProgress(progressId, duration, callback) {
+            const progressBar = document.getElementById(progressId);
             let width = 0;
-            const interval = setInterval(function() {
+            const interval = setInterval(() => {
                 width += 2;
-                bar.style.width = width + '%';
-                
+                progressBar.style.width = width + '%';
                 if (width >= 100) {
                     clearInterval(interval);
-                    
-                    const isBad = badPasswords.includes(password.toLowerCase());
-                    
-                    if (isBad) {
-                        text.innerHTML = '❌ <strong>Найден в базе популярных паролей!</strong><br>' +
-                                       'Этот пароль взламывается мгновенно';
-                        text.style.color = '#f44336';
-                    } else {
-                        text.innerHTML = '✅ <strong>Не найден в базе популярных паролей</strong><br>' +
-                                       'Хороший первый шаг к безопасности';
-                        text.style.color = '#4CAF50';
-                    }
-                    
-                    setTimeout(function() { runStep2(password, isBad); }, 500);
+                    setTimeout(callback, 200);
                 }
-            }, 20);
+            }, duration / 50);
         }
-        
-        function runStep2(password, isBad) {
-            const bar = document.getElementById('bar2');
-            const text = document.getElementById('text2');
+
+        function checkCommonPasswords(password) {
+            const isCommon = weakPasswords.includes(password.toLowerCase());
+            const result = document.getElementById('result1');
             
-            let width = 0;
-            const interval = setInterval(function() {
-                width += 2;
-                bar.style.width = width + '%';
-                
-                if (width >= 100) {
-                    clearInterval(interval);
-                    
-                    const hasUpper = /[A-Z]/.test(password);
-                    const hasLower = /[a-z]/.test(password);
-                    const hasNum = /\d/.test(password);
-                    const hasSym = /[^a-zA-Z0-9]/.test(password);
-                    const length = password.length;
-                    
-                    let score = 0;
-                    if (hasUpper) score++;
-                    if (hasLower) score++;
-                    if (hasNum) score++;
-                    if (hasSym) score++;
-                    if (length >= 12) score++;
-                    
-                    const details = [];
-                    if (hasUpper) details.push('Заглавные буквы');
-                    if (hasLower) details.push('Строчные буквы');
-                    if (hasNum) details.push('Цифры');
-                    if (hasSym) details.push('Спецсимволы');
-                    
-                    text.innerHTML = `<strong>Сложность: ${score}/5</strong><br>` +
-                                   `Длина: ${length} символов<br>` +
-                                   `Использует: ${details.join(', ') || 'ничего'}`;
-                    
-                    text.style.color = score >= 4 ? '#4CAF50' : score >= 3 ? '#ff9800' : '#f44336';
-                    
-                    setTimeout(function() { runStep3(password, isBad, score, length); }, 500);
-                }
-            }, 20);
+            if (isCommon) {
+                result.innerHTML = '<span class="error">❌ Найден в базе слабых паролей</span><br>Этот пароль взламывается мгновенно';
+            } else {
+                result.innerHTML = '<span class="success">✅ Не найден в базе слабых паролей</span><br>Хороший первый шаг';
+            }
         }
-        
-        function runStep3(password, isBad, score, length) {
-            const bar = document.getElementById('bar3');
-            const timeDetails = document.getElementById('timeDetails');
+
+        function analyzeComplexity(password) {
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasNum = /\d/.test(password);
+            const hasSym = /[^A-Za-z0-9]/.test(password);
+            const length = password.length;
             
-            let width = 0;
-            const interval = setInterval(function() {
-                width += 2;
-                bar.style.width = width + '%';
-                
-                if (width >= 100) {
-                    clearInterval(interval);
-                    
-                    let html = `<div class="time-details">`;
-                    
-                    if (isBad || length < 6) {
-                        html += `<p><strong>Время взлома: мгновенно (менее 1 секунды)</strong></p>`;
-                        html += `<p>Этот пароль слишком простой и может быть взломан моментально.</p>`;
-                    } else {
-                        const crackData = calculateCrackTime(password);
-                        
-                        html += `<p><strong>Расчетное время взлома методом полного перебора:</strong></p>`;
-                        
-                        html += `<div class="time-item">`;
-                        html += `<span>📱 Обычный компьютер (1 млрд попыток/сек):</span>`;
-                        html += `<span class="time-value">${formatTime(crackData.обычныйПК)}</span>`;
-                        html += `</div>`;
-                        
-                        html += `<div class="time-item">`;
-                        html += `<span>🤖 Ботнет (100 млрд попыток/сек):</span>`;
-                        html += `<span class="time-value">${formatTime(crackData.ботнет)}</span>`;
-                        html += `</div>`;
-                        
-                        html += `<div class="time-item">`;
-                        html += `<span>🚀 Суперкомпьютер (1 трлн попыток/сек):</span>`;
-                        html += `<span class="time-value">${formatTime(crackData.суперкомпьютер)}</span>`;
-                        html += `</div>`;
-                        
-                        html += `<div class="time-item">`;
-                        html += `<span>🔢 Количество комбинаций:</span>`;
-                        html += `<span class="time-value">${crackData.combinations}</span>`;
-                        html += `</div>`;
-                        
-                        html += `<p style="margin-top: 10px; color: #80deea; font-size: 0.9em;"><em>Расчет основан на атаке полным перебором (brute-force)</em></p>`;
-                    }
-                    
-                    html += `</div>`;
-                    timeDetails.innerHTML = html;
-                    
-                    setTimeout(function() { runStep4(password, isBad, score, length); }, 500);
-                }
-            }, 20);
-        }
-        
-        function runStep4(password, isBad, score, length) {
-            const bar = document.getElementById('bar4');
-            const rating = document.getElementById('rating');
-            const summary = document.getElementById('summary');
+            let score = 0;
+            if (hasUpper) score++;
+            if (hasLower) score++;
+            if (hasNum) score++;
+            if (hasSym) score++;
+            if (length >= 12) score++;
             
-            let width = 0;
-            const interval = setInterval(function() {
-                width += 2;
-                bar.style.width = width + '%';
-                
-                if (width >= 100) {
-                    clearInterval(interval);
-                    
-                    let ratingText, ratingClass, ratingEmoji;
-                    if (isBad || length < 6) {
-                        ratingText = 'ОПАСНО';
-                        ratingClass = 'bad';
-                        ratingEmoji = '🔴';
-                    } else if (score < 3 || length < 8) {
-                        ratingText = 'СЛАБО';
-                        ratingClass = 'bad';
-                        ratingEmoji = '🔴';
-                    } else if (score < 4 || length < 10) {
-                        ratingText = 'СРЕДНЕ';
-                        ratingClass = 'medium';
-                        ratingEmoji = '🟡';
-                    } else if (score < 5) {
-                        ratingText = 'ХОРОШО';
-                        ratingClass = 'good';
-                        ratingEmoji = '🟢';
-                    } else {
-                        ratingText = 'ОТЛИЧНО';
-                        ratingClass = 'good';
-                        ratingEmoji = '✅';
-                    }
-                    
-                    rating.innerHTML = `${ratingEmoji} ${ratingText}`;
-                    rating.className = `rating ${ratingClass}`;
-                    
-                    // Формируем рекомендации
-                    let advice = '<div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 15px;">';
-                    advice += '<h4>Рекомендации по улучшению:</h4>';
-                    
-                    if (isBad) {
-                        advice += '<p><strong>❌ Немедленно смените пароль!</strong> Он в базе популярных паролей</p>';
-                    }
-                    
-                    const hasUpper = /[A-Z]/.test(password);
-                    const hasLower = /[a-z]/.test(password);
-                    const hasNum = /\d/.test(password);
-                    const hasSym = /[^a-zA-Z0-9]/.test(password);
-                    
-                    const tips = [];
-                    if (length < 12) tips.push(`Увеличьте длину до 12+ символов (сейчас: ${length})`);
-                    if (!hasUpper) tips.push('Добавьте заглавные буквы (A-Z)');
-                    if (!hasLower) tips.push('Добавьте строчные буквы (a-z)');
-                    if (!hasNum) tips.push('Добавьте цифры (0-9)');
-                    if (!hasSym) tips.push('Добавьте спецсимволы (!@#$%^&*)');
-                    
-                    if (tips.length > 0) {
-                        advice += '<ul style="margin-top: 10px;">';
-                        tips.forEach(tip => {
-                            advice += `<li>✅ ${tip}</li>`;
-                        });
-                        advice += '</ul>';
-                    } else {
-                        advice += '<p>🎉 Ваш пароль отличный! Соответствует всем критериям безопасности.</p>';
-                    }
-                    
-                    advice += '</div>';
-                    summary.innerHTML = advice;
-                    
-                    console.log("Проверка завершена!");
-                }
-            }, 20);
+            const result = document.getElementById('result2');
+            let details = [];
+            if (hasUpper) details.push('Заглавные');
+            if (hasLower) details.push('Строчные');
+            if (hasNum) details.push('Цифры');
+            if (hasSym) details.push('Символы');
+            
+            if (score >= 4) {
+                result.innerHTML = `<span class="success">Сильная сложность (${score}/5)</span><br>Длина: ${length} | Особенности: ${details.join(', ')}`;
+            } else if (score >= 3) {
+                result.innerHTML = `<span class="warning">Средняя сложность (${score}/5)</span><br>Длина: ${length} | Особенности: ${details.join(', ')}`;
+            } else {
+                result.innerHTML = `<span class="error">Слабая сложность (${score}/5)</span><br>Длина: ${length} | Особенности: ${details.join(', ')}`;
+            }
         }
+
+        function calculateCrackTime(password) {
+            let charsetSize = 0;
+            if (/[a-z]/.test(password)) charsetSize += 26;
+            if (/[A-Z]/.test(password)) charsetSize += 26;
+            if (/\d/.test(password)) charsetSize += 10;
+            if (/[^a-zA-Z0-9]/.test(password)) charsetSize += 10;
+            
+            const combinations = Math.pow(charsetSize, password.length);
+            const timeSeconds = combinations / 1000000000;
+            
+            const result = document.getElementById('result3');
+            result.innerHTML = `
+                <span>Комбинации: ${combinations.toExponential(2)}</span><br>
+                Время перебора: ${formatTime(timeSeconds)}
+            `;
+        }
+
+        function formatTime(seconds) {
+            if (seconds < 0.001) return 'мгновенно';
+            if (seconds < 1) return (seconds * 1000).toFixed(0) + ' мс';
+            if (seconds < 60) return seconds.toFixed(1) + ' сек';
+            if (seconds < 3600) return (seconds / 60).toFixed(1) + ' мин';
+            if (seconds < 86400) return (seconds / 3600).toFixed(1) + ' час';
+            return (seconds / 86400).toFixed(1) + ' дней';
+        }
+
+        function showFinalResult(password) {
+            const isCommon = weakPasswords.includes(password.toLowerCase());
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasNum = /\d/.test(password);
+            const hasSym = /[^A-Za-z0-9]/.test(password);
+            
+            let score = 0;
+            if (hasUpper) score++;
+            if (hasLower) score++;
+            if (hasNum) score++;
+            if (hasSym) score++;
+            if (password.length >= 12) score++;
+            
+            let rating = '', ratingClass = '', advice = [];
+            
+            if (isCommon || password.length < 6) {
+                rating = 'ОПАСНО';
+                ratingClass = 'rating-poor';
+                advice.push('Этот пароль крайне ненадёжен');
+                advice.push('Немедленно смените его');
+            } else if (score < 3) {
+                rating = 'СЛАБО';
+                ratingClass = 'rating-poor';
+                if (password.length < 8) advice.push('Увеличьте длину до 12+ символов');
+                if (!hasUpper) advice.push('Добавьте заглавные буквы');
+                if (!hasSym) advice.push('Добавьте спецсимволы');
+            } else if (score < 4) {
+                rating = 'СРЕДНЕ';
+                ratingClass = 'rating-weak';
+                if (password.length < 12) advice.push('Увеличьте длину до 12+ символов');
+                if (!hasSym) advice.push('Добавьте спецсимволы');
+            } else if (score < 5) {
+                rating = 'ХОРОШО';
+                ratingClass = 'rating-good';
+                advice.push('Неплохая защита');
+                if (password.length < 16) advice.push('Для важных аккаунтов используйте 16+ символов');
+            } else {
+                rating = 'ОТЛИЧНО';
+                ratingClass = 'rating-excellent';
+                advice.push('Отличный пароль!');
+                advice.push('Рекомендуем использовать менеджер паролей');
+            }
+            
+            document.getElementById('ratingContainer').innerHTML = `
+                <div class="rating-box ${ratingClass}">
+                    ${rating}
+                </div>
+            `;
+            
+            if (advice.length) {
+                document.getElementById('adviceContainer').innerHTML = `
+                    <div class="advice-box">
+                        <h4>Рекомендации:</h4>
+                        <ul class="advice-list">
+                            ${advice.map(item => `<li>✅ ${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+        }
+
+        window.addEventListener('load', function() {
+            generatePassword();
+            
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') testPassword();
+            });
+        });
     </script>
 </body>
 </html>
